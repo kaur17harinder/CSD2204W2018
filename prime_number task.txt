@@ -1,0 +1,69 @@
+MariaDB [csd]> create procedure prime_number(IN value int(5))
+    -> begin
+    ->
+    -> DECLARE m int default 1;
+    -> DECLARE n int default 1;
+    -> DECLARE count int default 0;
+    ->
+    ->
+    ->
+    -> while(n<=value) do
+    -> while(m<=n) do
+    -> if(n%m=0) then
+    -> set count = count + 1;
+    -> end if;
+    -> set m=m+1;
+    -> end while;
+    -> if(count = 2) then
+    -> INSERT into number VALUES (n);
+    -> end if;
+    ->
+    -> set m = 1;
+    -> set n = n + 1;
+    -> set count = 0;
+    ->
+    -> end while;
+    -> end$$
+Query OK, 0 rows affected (0.09 sec)
+
+MariaDB [csd]> call prime_number(100)$$
+Query OK, 1 row affected (0.93 sec)
+
+MariaDB [csd]> select * from number;$$
++-------+
+| n1    |
++-------+
+|  2.00 |
+|  3.00 |
+|  5.00 |
+|  7.00 |
+| 11.00 |
+| 13.00 |
+| 17.00 |
+| 19.00 |
+| 23.00 |
+| 29.00 |
+| 31.00 |
+| 37.00 |
+| 41.00 |
+| 43.00 |
+| 47.00 |
+| 53.00 |
+| 59.00 |
+| 61.00 |
+| 67.00 |
+| 71.00 |
+| 73.00 |
+| 79.00 |
+| 83.00 |
+| 89.00 |
+| 97.00 |
++-------+
+25 rows in set (0.00 sec)
+
+MariaDB [csd]>
+
+
+
+
+
